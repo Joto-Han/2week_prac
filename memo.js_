@@ -1,0 +1,57 @@
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Post extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  };
+  Post.init({
+    post_id: {
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
+    post_title: DataTypes.STRING,
+    post_content: DataTypes.STRING,
+    post_created_at: DataTypes.STRING,
+    post_user: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'Post',
+  });
+  return Post;
+};
+
+
+
+npm init -y
+npm i sequelize mysql2 -S
+npm i sequelize-cli -D
+npm i -g nodemon // 성훈님 추천 (코드 바꿀때마다 서버 재실행할 필요 없음! 자동 재실행)
+// 통합 npm install express jsonwebtoken cookie-parser -S
+
+npx sequelize init
+
+
+"development": {
+    "username": "root",
+    "password": "wnghqkd726",
+    "database": "express_db",
+    "host": "express-database.cg21gzirpdhp.ap-northeast-2.rds.amazonaws.com",
+    "dialect": "mysql"
+  },
+
+npx sequelize db:create
+
+// 모델 생성 명령어
+npx sequelize model:generate --name Post --attributes post_title:string,post_content:text,post_user:integer
+npx sequelize model:generate --name User --attributes email:string,nickname:string,password:string
+
+// 테이블 생성 명령어
+npx sequelize db:migrate
